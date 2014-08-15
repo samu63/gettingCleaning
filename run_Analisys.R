@@ -16,8 +16,8 @@ library(data.table)
 if (!file.exists("test/X_test.txt")) stop ("test/X_test.txt not found.")
 if (!file.exists("train/X_train.txt")) stop ("train/X_train.txt not found.")
 
-if (!file.exists("../TData")) {
-  dir.create("../TData")
+if (!file.exists("./TData")) {
+  dir.create("./TData")
 }
 
 T10rows <- read.table("test/X_test.txt", nrows=10)
@@ -90,7 +90,7 @@ tidy <- cbind(subject_tidy, tidy)
 
 colnames(tidy)[1] <- "subjectID"
 colnames(tidy)[2] <- "activity_name"
-write.table(data.frame(tidy),file="../TData/tidydatastep1.txt")
+write.table(data.frame(tidy),file="./TData/tidydatastep1.txt")
 #END point 4
 ############################################################################
 
@@ -103,7 +103,7 @@ tidy <- data.table(tidy)
 setkey(tidy, subjectID, activity_name)
 
 tidy.final <- tidy[, lapply(.SD, mean), by=list(subjectID, activity_name) ]
-write.table(data.frame(tidy.final),file="../TData/tidydatasytep2.txt")
+write.table(data.frame(tidy.final),file="./TData/tidydatasytep2.txt")
 
 #END point 5
 ############################################################################
